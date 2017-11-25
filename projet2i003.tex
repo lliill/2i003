@@ -20,41 +20,91 @@
 \section{Exercice 1}
 
 \subsection{}
+\label{subsec:q1}
 Comme un nucléotide ne peut former une paire avec lui même, donc 
 
 \begin{center}
-$\forall i\in\{1,...,n\}$, S$_{i,i}$ = \{\} et E$_{i,i}$ = 0
+$\forall i\in\{1,...,n\}$, \quad S$_{i,i}$ = \{\} et E$_{i,i}$ = 0
 \par\end{center}
 
 \subsection{}
+\label{subsec:q2}
 
 	\subsubsection{}
 	Si ni i, ni j ne sont couplés dans S$_{i,j}$ , alors
 	%{\centering S$_{i,j}$ = S$_{i+1,j-1}$\par}
 	\begin{center}
-	S$_{i,j}$ = S$_{i+1,j-1}$, E$_{i,j}$ = E$_{i+1,j-1}$
+	S$_{i,j}$ = S$_{i+1,j-1}$, \quad E$_{i,j}$ = E$_{i+1,j-1}$
 	\par\end{center}
 
 	\subsubsection{}
 	Si j n'est pas couplée dans S$_{i,j}$ , alors
 	\begin{center}
-	S$_{i,j}$ = S$_{i,j-1}$, E$_{i,j}$ = E$_{i,j-1}$
+	S$_{i,j}$ = S$_{i,j-1}$,  \quad E$_{i,j}$ = E$_{i,j-1}$
 	\par\end{center}
 
 	\subsubsection{}
-	Soit $\left(i,j\right)\in S_{i,j}$,
+	Si $\left(i,j\right)\in S_{i,j}$, alors
 	\begin{center}
-	$S_{i,j} \, \cup \, \left(i,j\right)$  = S$_{i,j-1}$,  E$_{i,j}+ 1$  = E$_{i,j-1}$
+	$S_{i,j} $  = S$_{i+1,j-1}\, \cup \, \left(i,j\right)$, \quad  E$_{i,j}$  = E$_{i+1,j-1}+ 1$
 	\par\end{center}
 
 	\subsubsection{}
-	Soit $\left(k,j\right)\in S_{i,j}$ avec $k\in\left\{ i+1,...,j-1\right\} $
+	Si $\left(k,j\right)\in S_{i,j}$ avec $k\in\left\{ i+1,...,j-1\right\} $, alors
 	\[
-	S_{i,k-1}\cup S_{k,j} \subset S_{i,j} \quad E_{i,k-1} + E_{k,j} \leq E_{i,j}
+	S_{i,j}= S_{i,k-1}\cup S_{k,j} \quad E_{i,j} = E_{i,k-1} + E_{k,j} 
 	\]
 
-	\subsection{}
+\subsection{}
+	\subsubsection{}
+		Par la question \ref{subsec:q2}, résumons en distinguant tous les cas possibles:
 	
+		\begin{enumerate}  
+		\item \label{itm:1}
+			 Soit ni i, ni j ne sont couplés dans S$_{i,j}$ , alors E$_{i,j}$ = E$_{i+1,j-1}$, \\
+			sinon on a toujours E$_{i,j} \geq E_{i+1,j-1}$
+		\item Soit j n'est pas couplée dans S$_{i,j}$ , alors  E$_{i,j}$ = E$_{i,j-1}$, \\
+			sinon on a toujours E$_{i,j} \geq E_{i,j-1}$
+	%	\item Soit i n'est pas couplée dans S$_{i,j}$ , alors  E$_{i,j}$ = E$_{i+1,j}$
+		\item Soit j est couplé avec i, c'est à dire $\left(i,j\right)\in S_{i,j}$, alors E$_{i,j}$  = E$_{i+1,j-1}+1$
+		\item Soit j est couplé avec un $k\in\left\{ i+1,...,j-1\right\} $, alors $E_{i,j} = E_{i,k-1} + E_{k,j}$,\\ sinon $E_{i,j} \geq E_{i,k-1} + E_{k,j}$ car $S_{i,j} \supset \, S_{i,k-1}\cup S_{k,j}\quad \forall k \in\left\{ i+1,...,j-1\right\}$
+		\end{enumerate}
+		
+		Soit la fonction e :$ \{1, ... , n\} \times{} \{1, ... , n\} \rightarrow{} \{0, 1\}$ qui vaut 1 ssi i et j peuvent être couplés. \par
+		\begin{description}
+		\item
+		\underline{Dans le cas  \ref{itm:1} et cas 3, $E_{i,j} = E_{i+1,j-1} + e(i,j)$ }  et on a toujours \underline{$E_{i,j} \geq E_{i+1,j-1} + e(i,j)$ }car 
+			\begin{itemize} 
+			\item si j est couplé avec i, $ e(i,j) = 1$, E$_{i,j}  = E_{i+1,j-1}+1 = E_{i+1,j-1}+ e(i,j) $, 
+			\item sinon $ e(i,j) = 0$, on a toujours E$_{i,j} \geq E_{i+1,j-1} = E_{i+1,j-1}+ e(i,j)$ par \ref{itm:1}.
+			\end{itemize}	
+		\item
+		\underline{Dans le cas 2, $E_{i,j} = E_{i,j-1}$} et on a toujours \underline{$E_{i,j} \geq E_{i,j-1}$} car S$_{i,j} \supset S_{i,j-1}$
+		\item
+		Par le cas 4, $\forall k \in\left\{ i+1,...,j-1\right\} \; E_{i,j} \geq E_{i,k-1} + E_{k,j}$. Donc \underline{ $E_{i,j} \geq  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ }.
+		\\Et
+		s'il existe $k_{0}\in\left\{ i+1,...,j-1\right\}$ tel que  $\left(k_{0},j\right)\in S_{i,j}$, $E_{i,j} = E_{i,k_{0}-1} + E_{k_{0},j}$\\
+		Dans ce cas-là, le max est atteint:\\
+		 $E_{i,k_{0}-1} + E_{k_{0},j} \geq  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ et $ \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j} \geq  E_{i,k_{0}-1} + E_{k_{0},j}$\\
+		D'où \underline{ $E_{i,j} = E_{i,k_{0}-1} + E_{k_{0},j} = \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$}
+		\end{description}
+		En conclusion: $E_{i,j}$ est un majorant de l'ensemble $\{E_{i+1,j-1} + e(i,j), \, E_{i,j-1}, \,  \displaystyle \max_{i<k<j}  E_{i,k-1} \}$, et ce majorant est atteint: il y a toujours un cas où la condition d'égalité est vrai. 
+		Donc
+\begin{center}
+ $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \, E_{i,j-1}, \,  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}\}$
+\par\end{center}
+		...
+	\subsubsection{}
+	Si k = j, $ E_{k,j}=E_{j,j}=0$ par \ref{subsec:q1}, donc $E_{i,j-1}\in \{i<k\leq j \mid  E_{i,k-1} + E_{k,j}\} $, et 
+\begin{center}
+$E_{i,j-1}\leq \max\{i<k\leq j \mid  E_{i,k-1} + E_{k,j}\} $
+\par\end{center}
+
+\begin{center}
+On en déduit que $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \,   \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}\}$
+\par\end{center}
+
+\subsection{}
 	\begin{lstlisting}[frame=single]  % Start your code-block
 	for i:=maxint to 0 do
 	begin
