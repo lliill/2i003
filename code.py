@@ -1,10 +1,10 @@
 a = 'TCGGCTGCATTTCGA'
 s={(3,13),(4,8),(5,7),(9,10)}#exemple
-def tailleMaxRec(a: set, i: int, j: int) -> int:
+def tailleMaxRec(a: str, i: int, j: int) -> int:
     n= len(a)
     assert 1 <= i <= n and 1 <= j <= n, 'impossible de tronquer'
     
-    if a == set() or i >= j:
+    if a == '' or i >= j:
         return 0
 
     def couple(i: int, j:int) -> bool:

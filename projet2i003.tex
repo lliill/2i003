@@ -110,11 +110,11 @@ On en déduit que $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \,   \displaystyle \max_
 \subsection{}
 	\begin{lstlisting}[frame=single]  % Start your code-block
 
-def tailleMaxRec(a: set, i: int, j: int) -> int:
+def tailleMaxRec(a: str, i: int, j: int) -> int:
     n= len(a)
     assert 1 <= i <= n and 1 <= j <= n, 'impossible de tronquer'
     
-    if a == set() or i >= j:
+    if a == '' or i >= j:
         return 0
 
     def couple(i: int, j:int) -> bool:
