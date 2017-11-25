@@ -1,0 +1,68 @@
+\documentclass[french]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[a4paper]{geometry}
+\usepackage{babel}
+\usepackage{listings}             % Include the listings-package
+
+\title{Recherche des structures secondaires d’une chaîne d’ADN\\
+\large Projet 2I003}
+%\title{Recherche des structures secondaires d’une chaîne d’ADN}
+\author{LI Mengda, GE Zhichun}
+
+
+\begin{document}
+\lstset{language=Python}	
+
+\maketitle
+
+\section{Exercice 1}
+
+\subsection{}
+Comme un nucléotide ne peut former une paire avec lui même, donc 
+
+\begin{center}
+$\forall i\in\{1,...,n\}$, S$_{i,i}$ = \{\} et E$_{i,i}$ = 0
+\par\end{center}
+
+\subsection{}
+
+	\subsubsection{}
+	Si ni i, ni j ne sont couplés dans S$_{i,j}$ , alors
+	%{\centering S$_{i,j}$ = S$_{i+1,j-1}$\par}
+	\begin{center}
+	S$_{i,j}$ = S$_{i+1,j-1}$, E$_{i,j}$ = E$_{i+1,j-1}$
+	\par\end{center}
+
+	\subsubsection{}
+	Si j n'est pas couplée dans S$_{i,j}$ , alors
+	\begin{center}
+	S$_{i,j}$ = S$_{i,j-1}$, E$_{i,j}$ = E$_{i,j-1}$
+	\par\end{center}
+
+	\subsubsection{}
+	Soit $\left(i,j\right)\in S_{i,j}$,
+	\begin{center}
+	$S_{i,j} \, \cup \, \left(i,j\right)$  = S$_{i,j-1}$,  E$_{i,j}+ 1$  = E$_{i,j-1}$
+	\par\end{center}
+
+	\subsubsection{}
+	Soit $\left(k,j\right)\in S_{i,j}$ avec $k\in\left\{ i+1,...,j-1\right\} $
+	\[
+	S_{i,k-1}\cup S_{k,j} \subset S_{i,j} \quad E_{i,k-1} + E_{k,j} \leq E_{i,j}
+	\]
+
+	\subsection{}
+	
+	\begin{lstlisting}[frame=single]  % Start your code-block
+	for i:=maxint to 0 do
+	begin
+	{ do nothing }
+	end;
+	Write('Case insensitive ');
+	Write('Pascal keywords.');
+	\end{lstlisting}
+
+
+\end{document}
