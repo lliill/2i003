@@ -9,6 +9,9 @@
 \usepackage{color}
 \usepackage{stmaryrd}
 
+\usepackage{tikz}
+\usepackage{tikz-qtree}
+
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
 \definecolor{mymauve}{rgb}{0.58,0,0.82}
@@ -89,18 +92,30 @@ $\forall i\in\{1,...,n\}, \quad S_{i,i} = \{\}$ et $ E_{i,i} = 0$
 	\[
 	S_{i,j}= S_{i,k-1}\cup S_{k,j} \quad E_{i,j} = E_{i,k-1} + E_{k,j} 
 	\]
-
+	car, par hypothèse, il n'existe pas de nœud: lorsqu'on coupe en k, on ne coupe pas de couple dans ce cas là, il n'y a donc pas de perte. Sinon, on a $S_{i,j} \subset S_{i,k-1}\cup S_{k,j} $ dans tous les cas.
 \subsection{}
 \label{subsec:q3}
 	\subsubsection{}
+
 		Par la question \ref{subsec:q2}, résumons en distinguant tous les cas possibles:
-	
+\\
+\begin{tikzpicture}
+\Tree 
+[.j	[.couplé 
+			[.{couplé avec i} {cas 3} ]    [.{couplé avec k} {cas 4} ] 
+	]
+	[.{non couplé (cas 2)} 
+			[.{i non couplé} {cas 1} ]	[.{i couplé (en fait il n'est pas important)} {cas 2} ]
+	]
+]
+
+\end{tikzpicture}	
 		\begin{enumerate}  
 		\item \label{itm:1}
 			 Soit ni i, ni j ne sont couplés dans S$_{i,j}$ , alors E$_{i,j}$ = E$_{i+1,j-1}$, \\
-			sinon on a toujours E$_{i,j} \geq E_{i+1,j-1}$
+			et on a toujours E$_{i,j} \geq E_{i+1,j-1}$ dans tous les cas.
 		\item Soit j n'est pas couplée dans S$_{i,j}$ , alors  E$_{i,j}$ = E$_{i,j-1}$, \\
-			sinon on a toujours E$_{i,j} \geq E_{i,j-1}$
+			et on a toujours E$_{i,j} \geq E_{i,j-1}$ dans tous les cas.
 	%	\item Soit i n'est pas couplée dans S$_{i,j}$ , alors  E$_{i,j}$ = E$_{i+1,j}$
 		\item Soit j est couplé avec i, c'est à dire $\left(i,j\right)\in S_{i,j}$, alors E$_{i,j}$  = E$_{i+1,j-1}+1$
 		\item Soit j est couplé avec un $k\in\left\{ i+1,...,j-1\right\} $, alors $E_{i,j} = E_{i,k-1} + E_{k,j}$,\\ sinon $E_{i,j} \geq E_{i,k-1} + E_{k,j}$ car $S_{i,j} \supset \, S_{i,k-1}\cup S_{k,j}\quad \forall k \in\left\{ i+1,...,j-1\right\}$
@@ -109,20 +124,21 @@ $\forall i\in\{1,...,n\}, \quad S_{i,i} = \{\}$ et $ E_{i,i} = 0$
 		Soit la fonction e :$ \{1, ... , n\} \times{} \{1, ... , n\} \rightarrow{} \{0, 1\}$ qui vaut 1 ssi i et j peuvent être couplés. \par
 		\begin{description}
 		\item
-		\underline{Dans le cas  \ref{itm:1} et cas 3, $E_{i,j} = E_{i+1,j-1} + e(i,j)$ }  et on a toujours \underline{$E_{i,j} \geq E_{i+1,j-1} + e(i,j)$ }car 
+		\underline{Dans le cas  \ref{itm:1} et cas 3, $E_{i,j} = E_{i+1,j-1} + e(i,j)$ }  
+et on a  \underline{$E_{i,j} \geq E_{i+1,j-1} + e(i,j)$ dans tous les cas. } 
 			\begin{itemize} 
 			\item si j est couplé avec i, $ e(i,j) = 1$, E$_{i,j}  = E_{i+1,j-1}+1 = E_{i+1,j-1}+ e(i,j) $, 
-			\item sinon $ e(i,j) = 0$, on a toujours E$_{i,j} \geq E_{i+1,j-1} = E_{i+1,j-1}+ e(i,j)$ par \ref{itm:1}.
+			\item sinon $ e(i,j) = 0$, on a toujours E$_{i,j} \geq E_{i+1,j-1} = E_{i+1,j-1}+ e(i,j)$ par le \ref{itm:1}.
 			\end{itemize}	
 		\item
-		\underline{Dans le cas 2, $E_{i,j} = E_{i,j-1}$} et on a toujours \underline{$E_{i,j} \geq E_{i,j-1}$} car S$_{i,j} \supset S_{i,j-1}$
+		\underline{Dans le cas 2, $E_{i,j} = E_{i,j-1}$} et on a \underline{$E_{i,j} \geq E_{i,j-1}$ dans tous les cas.} car S$_{i,j} \supset S_{i,j-1}$
 		\item
-		Par le cas 4, $\forall k \in\left\{ i+1,...,j-1\right\} \; E_{i,j} \geq E_{i,k-1} + E_{k,j}$. Donc \underline{ $E_{i,j} \geq  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ }.
+		Par le cas 4, $\forall k \in\left\{ i+1,...,j-1\right\} \; E_{i,j} \geq E_{i,k-1} + E_{k,j}$. Donc \underline{ $E_{i,j} \geq  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ dans tous les cas}.
 		\\Et
 		s'il existe $k_{0}\in\left\{ i+1,...,j-1\right\}$ tel que  $\left(k_{0},j\right)\in S_{i,j}$, $E_{i,j} = E_{i,k_{0}-1} + E_{k_{0},j}$\\
 		Dans ce cas-là, le max est atteint:\\
 		 $E_{i,k_{0}-1} + E_{k_{0},j} \geq  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ et $ \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j} \geq  E_{i,k_{0}-1} + E_{k_{0},j}$\\
-		D'où \underline{ $E_{i,j} = E_{i,k_{0}-1} + E_{k_{0},j} = \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$}
+		D'où \underline{ $E_{i,j} = E_{i,k_{0}-1} + E_{k_{0},j} = \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}$ dans le cas 4}
 		\end{description}
 		En conclusion: $E_{i,j}$ est un majorant de l'ensemble $\{E_{i+1,j-1} + e(i,j), \, E_{i,j-1}, \,  \displaystyle \max_{i<k<j}  E_{i,k-1} \}$, et ce majorant est atteint: il y a toujours un cas où la condition d'égalité est vrai. 
 		Donc
@@ -131,13 +147,13 @@ $\forall i\in\{1,...,n\}, \quad S_{i,i} = \{\}$ et $ E_{i,i} = 0$
 \par\end{center}
 		...
 	\subsubsection{}
-	Si k = j, $ E_{k,j}=E_{j,j}=0$ par \ref{subsec:q1}, donc $E_{i,j-1}\in \{i<k\leq j \mid  E_{i,k-1} + E_{k,j}\} $, et 
+	Si k = j, $ E_{k,j}=E_{j,j}=0$ par \ref{subsec:q1}, donc $E_{i,j-1}=(E_{i,j-1}+E_{j,j})\in \{E_{i,k-1} + E_{k,j} \mid i<k\leq j   \} $, et 
 \begin{center}
-$E_{i,j-1}\leq \max\{i<k\leq j \mid  E_{i,k-1} + E_{k,j}\} $
+$E_{i,j-1}\leq \max \{E_{i,k-1} + E_{k,j} \mid i<k\leq j   \} $
 \par\end{center}
 
 \begin{center}
-On en déduit que $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \,   \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}\}$
+On en déduit que $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \,   \displaystyle \max_{i<k \leq j}  E_{i,k-1} + E_{k,j}\}$
 \par\end{center}
 
 \pagebreak
@@ -213,5 +229,8 @@ Cas de base: pour p = 2, j - i = 2\\
 	\end{itemize}
 \item 
 Induction:
+Soit $n \in \mathbb{N}, n\geq2 $ fixé, supposons $u_{n} = u_{0} + 1 + 2\sum_{i=0}^{1} u_{i}$
 \end{itemize}
+
+
 \end{document}
