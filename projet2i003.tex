@@ -45,7 +45,7 @@
 }
 
 \title{Recherche des structures secondaires d’une chaîne d’ADN\\
-\large Projet 2I003}
+\large Projet 2I003 réalisé sur l'ancient sujet}
 %\title{Recherche des structures secondaires d’une chaîne d’ADN}
 \author{LI Mengda, GE Zhichun}
 
@@ -243,8 +243,8 @@ On en déduit que sa complexité est de $\mathcal{O}(2^n)$
 \subsection{}
 Sa complexité est de $\Theta(n^3)$.\\
 Il y a une boucle for simple et une boucle for triplé dans cet algorithme. Le reste est de temps constant.\\
-La première boule fait (n-1) itération. Dans chaque itération on éffectue un nombre constant d'opérations. Donc il est de complexité $\Theta(n)$.\\
-Le cœur de l'analyse est au sein de la deuxième boule composé en effet de trois boucle for, voici le code Python qui l'implémente:
+La première boucle fait (n-1) itération. Dans chaque itération on éffectue un nombre constant d'opérations. Donc il est de complexité $\Theta(n)$.\\
+Le cœur de l'analyse est au sein de la deuxième boucle composé en effet de trois boucle for, voici le code Python qui l'implémente:
 \begin{lstlisting}
     for p in range(1, n):
         for i in range(1, n-p+1):
@@ -428,7 +428,7 @@ CRec(18)  = 480.611199, log'(CRec(18)) = 1.201747
 CRec(19)  = 1446.607645, log'(CRec(19)) = 1.102334
 
 \end{lstlisting}
-On peut voir que le temps d'execution de tailleMaxRec croît très vite en raison de sa complexité exponentielle. Lorsque n = 18, cela prend plus de 5 minutes pour exécuter et plus de 10 minutes lorsque n = 19. Donc la plus grande valeur de n que je peux traiter est 19.\\
+On peut voir que le temps d'execution de tailleMaxRec croît très vite en raison de sa complexité exponentielle. Lorsque n = 18, cela prend plus de 5 minutes pour l'exécuter et plus de 10 minutes lorsque n = 19. Donc la plus grande valeur de n que je peux traiter est 19.\\
 La pente de la droite $\log' CRec(n) \approx 1$, qui vaut dire que cette fonction est affine à n.
 
 \subsubsection{Test de la fonction itérative}
@@ -482,7 +482,7 @@ CIter(300) = 2.228376, CIter(300)/300^3 =  0.000000
 
 CIter(301) = 2.223427, CIter(301)/301^3 =  0.000000...
 \end{lstlisting}
-Voici quelques recherche à la main pour trouver <la plus grande valeur>. Lorsque n = 1500, cela prend déjà plus de 5 min pour calculer. Donc je choisis 1500 comme <la plus grande valeur>.
+Voici quelques recherche à la main pour trouver <la plus grande valeur>. Lorsque n = 1500, cela prend déjà plus de 5 min pour le calculer. Donc je choisis 1500 comme <la plus grande valeur>.
 \begin{lstlisting}
 >>> n=500
 >>> timeit.timeit("tailleMaxIter(SeqAleatoire(n), 1, n)", number=1,
