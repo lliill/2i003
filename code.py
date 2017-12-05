@@ -1,5 +1,6 @@
 from random import randrange
 from math import log
+
 a = 'TCGGCTGCATTTCGA'
 s={(3,13),(4,8),(5,7),(9,10)}#exemple
 
@@ -51,7 +52,7 @@ def SeqAleatoire(n: int) -> str:
     return ''.join(['A','T','C','G'][randrange(4)] for i in range(n))#i peu d'importance
 
 
-def test1() -> None:
+def test0() -> None:
     print("E_3_13 calcule par l'algorithme recursive =", tailleMaxRec(a, 3, 13))
     print("E_3_13 calcule par l'algorithme iterative =", tailleMaxIter(a, 3, 13))
     print('10 executions de la fonction recursive prennent',
@@ -93,5 +94,12 @@ def testIter() -> None:
         n = n + 1
         
 if __name__ == '__main__':
+    import sys
     import timeit
-    testIter()
+    if len(sys.argv) == 1:
+        [test0, testRec, testIter][int(
+            input("""Saisir le test que vous voulez effectuer:
+0 pour un test de validite des fonctions et un petit test de temps
+1 pour testRec
+2 pour testIter"""))]()
+
