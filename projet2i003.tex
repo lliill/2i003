@@ -48,7 +48,7 @@
 }
 
 \title{Recherche des structures secondaires d’une chaîne d’ADN\\
-\large Projet 2I003 réalisé sur l'ancient sujet}
+\large Projet 2I003 réalisé sur l'ancien sujet}
 %\title{Recherche des structures secondaires d’une chaîne d’ADN}
 \author{LI Mengda, GE Zhichun}
 
@@ -148,7 +148,7 @@ et on a  \underline{$E_{i,j} \geq E_{i+1,j-1} + e(i,j)$ dans tous les cas. }
 \begin{center}
  $E_{i,j} =\max\{E_{i+1,j-1} + e(i,j), \, E_{i,j-1}, \,  \displaystyle \max_{i<k<j}  E_{i,k-1} + E_{k,j}\}$
 \par\end{center}
-		...
+		
 	\subsubsection{}
 	Si k = j, $ E_{k,j}=E_{j,j}=0$ par \ref{subsec:q1}, donc $E_{i,j-1}=(E_{i,j-1}+E_{j,j})\in \{E_{i,k-1} + E_{k,j} \mid i<k\leq j   \} $, et 
 \begin{center}
@@ -229,7 +229,7 @@ En conclusion, $u_{p}=u_{p-2}+1+2\sum_{i=0}^{p-1} u_{i}$
 Démontrons par récurrence $u_{n} \geq 2^n$.
 	\begin{itemize}
 	\item 
-	Cas de base, $u_{0}=1 \geq 2^0$,  $u_{1} = 3 \geq 2^1$ vérifié dans question 1.\\ Et $u_{2}=u_{0} +1+2(u_{0}+u_{1}) = 10 \geq 2^2$
+	Cas de base, $u_{0}=1 \geq 2^0$,  $u_{1} = 4 \geq 2^1$ vérifié dans question 1.\\ Et $u_{2}=u_{0} +1+2(u_{0}+u_{1}) = 12 \geq 2^2$
 	\item
 	Induction: par récurrence forte\\
 Soit $n \in \mathbb{N}, n\geq2 $ fixé, supposons on a $u_{k} \geq 2^k \; \forall k \in \{2, ..., n\}$\\
@@ -244,8 +244,8 @@ On en déduit que sa complexité est de $\mathcal{O}(2^n)$
 
 \subsection{}
 Sa complexité est de $\Theta(n^3)$.\\
-Il y a une boucle for simple et une boucle for triplé dans cet algorithme. Le reste est de temps constant.\\
-La première boucle fait (n-1) itération. Dans chaque itération on éffectue un nombre constant d'opérations. Donc il est de complexité $\Theta(n)$.\\
+Il y a une boucle for simple et une boucle for triple dans cet algorithme. Le reste est de temps constant.\\
+La première boucle fait (n-1) itération. Dans chaque itération on effectue un nombre fini d'opérations. Donc il est de complexité $\Theta(n)$.\\
 Le cœur de l'analyse est au sein de la deuxième boucle composé en effet de trois boucle for, voici le code Python qui l'implémente:
 \begin{lstlisting}
     for p in range(1, n):
