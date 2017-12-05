@@ -192,27 +192,26 @@ Cette fonction calcule exactement $\max\{E_{i+1,j-1} + e(i,j), \,    \max_{i<k<j
 
 \subsection{}
 \subsubsection{}
-Pour $u_{0}$, $(p = 0) \Rightarrow (i = j)$. Donc l'appel de fonction retourne simplement 0, $u_{0}=1$ \par
-Pour $u_{1}$, $(p = 1) \Rightarrow (i + 1 = j)$, donc cet appel retourne 
+Pour $u_{0}$, $(p = 0) \Rightarrow (i = j)$. Donc l'appel de fonction retourne simplement 0, mais on l'a appelé quand-même une fois elle-même $u_{0}=1$ \par
+Pour $u_{1}$, $(p = 1) \Rightarrow (i + 1 = j)$, donc cet appel s'appelle d'abord une fois elle-même et retourne 
 \begin{lstlisting}
 max(tailleMaxRec(a, i+1, j-1) + e(i,j),
                max([tailleMaxRec(a, i, k-1) + tailleMaxRec(a, k, j)
                     for k in range(i+1, j+1)]) )\end{lstlisting}
 Vu que i + 1 = j,  tailleMaxRec(a, i+1, j-1) retourne simplement 0 car $i+1=j\geq j-1$.\\
 Analysons la dernière itérable 
-\begin{lstlisting}
-[tailleMaxRec(a, i, k-1) + tailleMaxRec(a, k, j) for k in range(i+1, j+1)]\end{lstlisting}
+\lstinline{[tailleMaxRec(a, i, k-1) + tailleMaxRec(a, k, j) for k in range(i+1, j+1)]}\\
 range(j, j+1) ne contient que j, donc cette liste n'a qu'un élément, cela vaut dire qu'on appelle deux fois  \lstinline{tailleMaxRec}.
-En sommant, $u_{1} = 3$
+En sommant, $u_{1} = 4$
 \subsubsection{}
 
-Soit $p \leq 2$, pour $u_{p}$\\
+Soit $p \geq 2$, pour $u_{p}$\\
 	\begin{itemize}
 	\item
 	On appelle d'abord une fois la fonction elle-même: \lstinline{tailleMaxRec(a, i, j)}, on a 1 appel. 
 	\item
 	Et puis on appelle  \lstinline{ tailleMaxRec (a, i+1, j-1) },\\
-	 $(j-1)-(i+1)=(j-i)-2=0$, on a donc $u_{0}$ appel(s).
+	 $(j-1)-(i+1)=(j-i)-2=p-2$, on a donc $u_{p-2}$ appel(s).
 	\item
 	Enfin, pour\\
  \lstinline{[ tailleMaxRec(a,i,k-1) + tailleMaxRec(a,k,j) for k in range(i+1, j+1) ]}\\
@@ -224,7 +223,7 @@ Pour la deuxième, en éffectuant un changement de variable q = p + i - k, on a 
 En sommant les deux sommes, on a bien $2\sum_{i=0}^{p-1} u_{i}$
 	\end{itemize}
 \par
-En conclusion, $u_{p}=u_{0}+1+2\sum_{i=0}^{p-1} u_{i}$
+En conclusion, $u_{p}=u_{p-2}+1+2\sum_{i=0}^{p-1} u_{i}$
 
 \subsubsection{}
 Démontrons par récurrence $u_{n} \geq 2^n$.
